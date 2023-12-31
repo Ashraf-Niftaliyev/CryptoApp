@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esrefnifteliyev.cryptoapp.R
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentHomeBinding
@@ -32,6 +33,13 @@ class HomeFragment : Fragment() {
            val adapter = CoinAdapter(requireContext(),coins)
             binding.recyclerView.adapter = adapter
             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+
+
+            adapter.setOnClickData { coin ->
+                 val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(coin.id)
+                 findNavController().navigate(action)
+            }
+
         }
     }
 }

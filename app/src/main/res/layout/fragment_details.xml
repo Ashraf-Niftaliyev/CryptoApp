@@ -3,8 +3,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.DetailsFragment">
 
+    <ImageView
+        android:id="@+id/cryptoImage"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/cryptoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cryptoImage"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Name: Bitcoin"/>
+    
+    <TextView
+        android:id="@+id/cryptoPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cryptoName"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Price: "/>
+
+    <TextView
+        android:id="@+id/cryptoHigh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cryptoPrice"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Daily High: "/>
+
+    <TextView
+        android:id="@+id/cryptoLow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cryptoHigh"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Daily Low:    "/>
+
+    <TextView
+        android:id="@+id/cryptoVolume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cryptoLow"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Volume:"/>
+
+    <TextView
+        android:id="@+id/cryptoPercent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cryptoVolume"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Percent:"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

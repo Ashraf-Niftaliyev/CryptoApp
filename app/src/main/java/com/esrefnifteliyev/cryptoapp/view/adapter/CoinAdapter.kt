@@ -10,6 +10,8 @@ import com.esrefnifteliyev.cryptoapp.databinding.RecyclerCoinItemBinding
 
 class CoinAdapter(val context: Context, val list: List<CryptoModel>): RecyclerView.Adapter<CoinAdapter.CoinHolder>() {
 
+    var onClick: (CryptoModel) -> Unit = { }
+
     inner class CoinHolder(val binding: RecyclerCoinItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinHolder {
@@ -31,6 +33,14 @@ class CoinAdapter(val context: Context, val list: List<CryptoModel>): RecyclerVi
         view.titleText.text = coin.name
         view.lastLimitsText.text = "High: $highPrice, Low: $lowPrice"
         view.priceText.text = "Price: $currentPrice$ "
+
+        holder.itemView.setOnClickListener{
+            onClick.invoke(coin)
+        }
+    }
+
+    fun setOnClickData(action: (CryptoModel) -> Unit){
+        onClick = action
     }
 
 }
