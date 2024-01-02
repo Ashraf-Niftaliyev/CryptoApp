@@ -36,11 +36,15 @@ class DetailsFragment : Fragment() {
           detailsViewModel.cryptoLiveData.observe(viewLifecycleOwner){ coin ->
               Glide.with(requireContext()).load(coin.image).into(binding.cryptoImage)
               binding.cryptoName.text = "Name: ${coin.name}"
-              binding.cryptoPrice.text = "Price: ${coin.current_price}"
-              binding.cryptoHigh.text = "High: ${coin.high_24h}"
-              binding.cryptoLow.text = "Low: ${coin.low_24h}"
-              binding.cryptoVolume.text = "Volume: ${coin.total_volume}"
-              binding.cryptoPercent.text = "Change: ${coin.price_change_percentage_24h_in_currency}"
+              binding.cryptoPrice.text = "Price: ${coin.current_price} $"
+              binding.cryptoHigh.text = "High: ${coin.high_24h} $"
+              binding.cryptoLow.text = "Low: ${coin.low_24h} $"
+
+              val numberFormatted = detailsViewModel.numberFormatted(coin.total_volume.toString())
+              binding.cryptoVolume.text = "Volume: $numberFormatted $"
+
+              val changeNumberFormatted = detailsViewModel.changeNumberFormatted(coin.price_change_percentage_24h_in_currency.toString())
+              binding.cryptoPercent.text = "Change: $changeNumberFormatted %"
           }
 
     }

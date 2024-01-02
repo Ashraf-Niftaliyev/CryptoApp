@@ -22,6 +22,22 @@ class DetailsViewModel @Inject constructor(
          }
      }
 
+     fun numberFormatted(volume: String) : String = if (volume.length > 12){
+         "${"%.2f".format(volume.toDouble()/1000000000)} B"
+     }else if (volume.length in 10..12){
+         "${"%.2f".format(volume.toDouble()/1000000)} M"
+     }else if(volume.length in 8..10){
+         "${"%.2f".format(volume.toDouble()/1000)} K"
+     }else{
+         volume
+     }
+
+
+     fun changeNumberFormatted(change:String): String = if (change.length > 4){
+         "%.4f".format(change.toDouble())
+     }else{
+         change
+     }
 
 
 }
