@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.esrefnifteliyev.cryptoapp.R
+import com.esrefnifteliyev.cryptoapp.data.local.room.CryptoEntity
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentDetailsBinding
 import com.esrefnifteliyev.cryptoapp.viewmodel.DetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,8 +46,22 @@ class DetailsFragment : Fragment() {
 
               val changeNumberFormatted = detailsViewModel.changeNumberFormatted(coin.price_change_percentage_24h_in_currency.toString())
               binding.cryptoPercent.text = "Change: $changeNumberFormatted %"
-          }
 
+
+              binding.saveCryptoButton.setOnClickListener {
+                  val cryptoEntity = CryptoEntity(
+                      id = 0,
+                      name = coin.name,
+                      currentPrice = coin.current_price,
+                      dailyHigh = coin.high_24h,
+                      dailyLow = coin.low_24h,
+                      totalVolume = numberFormatted,
+                      change = changeNumberFormatted,
+                  )
+
+                   detailsViewModel.insertCrypto(cryptoEntity)
+              }
+          }
     }
 
 }
