@@ -1,5 +1,9 @@
 package com.esrefnifteliyev.cryptoapp.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class CryptoModel(
     val ath: Double,
     val ath_change_percentage: Double,
@@ -24,9 +28,8 @@ data class CryptoModel(
     val price_change_24h: Double,
     val price_change_percentage_24h: Double,
     val price_change_percentage_24h_in_currency: Double,
-    val roi: Any,
     val sparkline_in_7d: SparklineIn7d,
     val symbol: String,
     val total_supply: Double,
     val total_volume: Double
-)
+): Parcelable

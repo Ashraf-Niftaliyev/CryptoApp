@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -20,7 +26,17 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="coinId"
-            app:argType="string" />
+            android:name="coin"
+            app:argType="com.esrefnifteliyev.cryptoapp.data.model.CryptoModel" />
     </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.esrefnifteliyev.cryptoapp.view.fragment.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.esrefnifteliyev.cryptoapp.view.fragment.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>

@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
 
 
             adapter.setOnClickData { coin ->
-                 val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(coin.id)
+                 val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(coin)
                  findNavController().navigate(action)
             }
 
