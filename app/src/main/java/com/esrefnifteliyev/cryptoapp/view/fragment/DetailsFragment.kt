@@ -31,10 +31,10 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
          val data: DetailsFragmentArgs by navArgs()
-         val coinId = data.coinId
+         val coin = data.coin
 
-          detailsViewModel.getFilteredCoins(coinId)
-          detailsViewModel.cryptoLiveData.observe(viewLifecycleOwner){ coin ->
+
+
               Glide.with(requireContext()).load(coin.image).into(binding.cryptoImage)
               binding.cryptoName.text = "Name: ${coin.name}"
               binding.cryptoPrice.text = "Price: ${coin.current_price} $"
@@ -62,6 +62,10 @@ class DetailsFragment : Fragment() {
                    detailsViewModel.insertCrypto(cryptoEntity)
               }
           }
-    }
+
+
+
+
+
 
 }
