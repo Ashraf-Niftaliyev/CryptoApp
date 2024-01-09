@@ -2,6 +2,7 @@ package com.esrefnifteliyev.cryptoapp.data.source
 
 import com.esrefnifteliyev.cryptoapp.data.local.room.AppDao
 import com.esrefnifteliyev.cryptoapp.data.local.room.CryptoEntity
+import com.esrefnifteliyev.cryptoapp.data.model.CryptoModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

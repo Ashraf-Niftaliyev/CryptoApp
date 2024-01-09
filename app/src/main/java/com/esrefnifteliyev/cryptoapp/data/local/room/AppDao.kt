@@ -5,17 +5,18 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.esrefnifteliyev.cryptoapp.data.model.CryptoModel
 
 @Dao
 interface AppDao {
 
     @Query("SELECT * FROM crypto_table")
-    fun getAllCryptos() : List<CryptoEntity>
+    suspend fun getAllCryptos() : List<CryptoEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertCrypto(cryptoEntity: CryptoEntity)
+    suspend fun insertCrypto(cryptoModel: CryptoEntity)
 
     @Delete
-    fun deleteCrypto(cryptoEntity: CryptoEntity)
+    suspend fun deleteCrypto(cryptoModel: CryptoEntity)
 
 }

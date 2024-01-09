@@ -1,10 +1,13 @@
 package com.esrefnifteliyev.cryptoapp.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CryptoModel(
+    val id: String,
     val ath: Double,
     val ath_change_percentage: Double,
     val ath_date: String,
@@ -15,7 +18,6 @@ data class CryptoModel(
     val current_price: Double,
     val fully_diluted_valuation: Double,
     val high_24h: Double,
-    val id: String,
     val image: String,
     val last_updated: String,
     val low_24h: Double,

@@ -30,9 +30,9 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    fun getAllCryptos(){
+    private fun getAllCryptos(){
         viewModelScope.launch {
-            println(localRepo.getAllCryptos())
+            localRepo.getAllCryptos()
         }
     }
 

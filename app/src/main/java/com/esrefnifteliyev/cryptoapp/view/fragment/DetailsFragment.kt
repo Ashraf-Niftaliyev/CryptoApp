@@ -31,6 +31,7 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
          val data: DetailsFragmentArgs by navArgs()
+
          val coin = data.coin
 
 
@@ -57,6 +58,7 @@ class DetailsFragment : Fragment() {
                       dailyLow = coin.low_24h,
                       totalVolume = numberFormatted,
                       change = changeNumberFormatted,
+                      image = coin.image
                   )
 
                    detailsViewModel.insertCrypto(cryptoEntity)
