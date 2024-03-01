@@ -62,7 +62,7 @@
 
 
     <EditText
-        android:id="@+id/loginPasswordText"
+        android:id="@+id/loginPasswordEdit"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginPasswordText"
+        app:layout_constraintTop_toBottomOf="@id/loginPasswordEdit"
         android:layout_marginTop="10dp"
         android:text="@string/forgot_password"
         android:textSize="16sp"
