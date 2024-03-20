@@ -9,4 +9,6 @@
     <color name="green">#2e8b57</color>
     <color name="darkGrey">#a9a9a9</color>
     <color name="slateGrey">#778899</color>
+    <color name="appRed">#ff322e</color>
+    <color name="darkBlue">#2d4866</color>
 </resources>

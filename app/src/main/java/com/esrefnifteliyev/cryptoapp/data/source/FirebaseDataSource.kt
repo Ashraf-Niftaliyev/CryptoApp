@@ -9,9 +9,10 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class FirebaseDataSource() {
-     private val authLiveData = MutableLiveData<FirebaseAuth?>(Firebase.auth)
+     private val authLiveData = MutableLiveData(Firebase.auth)
     suspend fun createUser(email: String, password: String, onSuccess: () -> Unit, onFail: (Exception) -> Unit) = withContext(Dispatchers.IO){
         authLiveData.value?.createUserWithEmailAndPassword(email,password)?.addOnSuccessListener {
+            authLiveData.value = Firebase.auth
             onSuccess()
         }?.addOnFailureListener { exception ->
             onFail(exception)
@@ -20,6 +21,7 @@ class FirebaseDataSource() {
 
     suspend fun signInUSer(email: String, password: String, onSuccess: () -> Unit, onFail: (Exception) -> Unit) = withContext(Dispatchers.IO){
         authLiveData.value?.signInWithEmailAndPassword(email,password)?.addOnSuccessListener {
+            authLiveData.value = Firebase.auth
             onSuccess()
         }?.addOnFailureListener{ exception ->
             onFail(exception)
@@ -28,6 +30,7 @@ class FirebaseDataSource() {
 
     suspend fun resetPassword(email: String, onSuccess: () -> Unit, onFail: (Exception) -> Unit) = withContext(Dispatchers.IO){
         authLiveData.value?.sendPasswordResetEmail(email)?.addOnSuccessListener {
+            authLiveData.value = Firebase.auth
             onSuccess()
         }?.addOnFailureListener { exception ->
             onFail(exception)
@@ -35,6 +38,7 @@ class FirebaseDataSource() {
     }
 
     suspend fun signOut() = withContext(Dispatchers.IO){
+        authLiveData.value = Firebase.auth
         authLiveData.value?.signOut()
     }
 

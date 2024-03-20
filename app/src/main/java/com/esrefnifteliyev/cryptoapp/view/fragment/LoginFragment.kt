@@ -2,10 +2,13 @@ package com.esrefnifteliyev.cryptoapp.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -49,6 +52,47 @@ class LoginFragment : Fragment() {
         binding.forgotPassword.setOnClickListener {
             findNavController().navigate(R.id.forgotPasswordFragment)
         }
+
+        binding.loginEmailEdit.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+             if(hasFocus){
+                 binding.loginEmailEdit.setBackgroundResource(R.drawable.login_focus_shape)
+             }else{
+                 binding.loginEmailEdit.setBackgroundResource(R.drawable.login_edittext_shape)
+             }
+
+        }
+
+        binding.loginPasswordEdit.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if(hasFocus){
+                binding.loginPasswordEdit.setBackgroundResource(R.drawable.login_focus_shape)
+            }else{
+                binding.loginPasswordEdit.setBackgroundResource(R.drawable.login_edittext_shape)
+            }
+
+        }
+
+
+         fun togglePasswordVisibility(passwordEditText : EditText){
+              val selectionStart = passwordEditText.selectionStart
+              val selectionEnd = passwordEditText.selectionEnd
+             if (passwordEditText.transformationMethod is PasswordTransformationMethod){
+                 passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+             }else{
+                 passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+             }
+
+             passwordEditText.setSelection(selectionStart,selectionEnd)
+         }
+
+         binding.visibilityPassword.setOnClickListener {
+              togglePasswordVisibility(binding.loginPasswordEdit)
+
+              if (binding.loginPasswordEdit.transformationMethod is PasswordTransformationMethod){
+                  binding.visibilityPassword.setImageResource(R.drawable.visibility_off)
+              }else{
+                  binding.visibilityPassword.setImageResource(R.drawable.visibility_on)
+              }
+         }
 
     }
 

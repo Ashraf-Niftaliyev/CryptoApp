@@ -75,6 +75,20 @@
         android:background="@drawable/login_edittext_shape"
         />
 
+    <ImageView
+        android:id="@+id/visibilityPassword"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintEnd_toEndOf="@id/loginPasswordEdit"
+        app:layout_constraintTop_toTopOf="@id/loginPasswordEdit"
+        app:layout_constraintBottom_toBottomOf="@id/loginPasswordEdit"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/visibility_off"
+        android:elevation="10dp"
+        />
+
+
+
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"

@@ -1,10 +1,13 @@
 package com.esrefnifteliyev.cryptoapp.view.fragment
 
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -43,6 +46,63 @@ class RegisterFragment : Fragment() {
         binding.haveAccount.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
         }
+
+
+        binding.registerNameEdit.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if (hasFocus){
+                binding.registerNameEdit.setBackgroundResource(R.drawable.login_focus_shape)
+            }else{
+                binding.registerNameEdit.setBackgroundResource(R.drawable.login_edittext_shape)
+            }
+
+        }
+
+        binding.registerEmailEdit.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if (hasFocus){
+                binding.registerEmailEdit.setBackgroundResource(R.drawable.login_focus_shape)
+            }else{
+                binding.registerEmailEdit.setBackgroundResource(R.drawable.login_edittext_shape)
+            }
+
+        }
+
+        binding.registerPasswordEdit.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if (hasFocus){
+                binding.registerPasswordEdit.setBackgroundResource(R.drawable.login_focus_shape)
+            }else{
+                binding.registerPasswordEdit.setBackgroundResource(R.drawable.login_edittext_shape)
+            }
+
+        }
+
+
+        fun togglePasswordVisibility(passwordEditText: EditText){
+            val selectionStart = passwordEditText.selectionStart
+            val selectionEnd = passwordEditText.selectionEnd
+
+            if (passwordEditText.transformationMethod is PasswordTransformationMethod){
+                passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            }else{
+                passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+
+            passwordEditText.setSelection(selectionStart,selectionEnd)
+
+        }
+
+        binding.registerPasswordEdit.setOnClickListener {
+
+            togglePasswordVisibility(binding.registerPasswordEdit)
+
+            if (binding.registerPasswordEdit.transformationMethod is PasswordTransformationMethod){
+                binding.visibilityPassword.setImageResource(R.drawable.visibility_off)
+            }else{
+                binding.visibilityPassword.setImageResource(R.drawable.visibility_on)
+            }
+
+        }
+
+
 
     }
 }

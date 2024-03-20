@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.esrefnifteliyev.cryptoapp.R
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentForgotPasswordBinding
@@ -37,6 +38,22 @@ class ForgotPasswordFragment : Fragment() {
             }, onFail = {
                 Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
             })
+        }
+
+
+        binding.forgotBackLogin.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+        }
+
+
+        binding.editReset.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+
+            if (hasFocus){
+                binding.editReset.setBackgroundResource(R.drawable.login_focus_shape)
+            }else{
+                binding.editReset.setBackgroundResource(R.drawable.login_edittext_shape)
+            }
+
         }
 
     }
