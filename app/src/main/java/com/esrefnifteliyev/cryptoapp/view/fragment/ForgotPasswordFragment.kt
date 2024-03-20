@@ -7,42 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.esrefnifteliyev.cryptoapp.R
-import com.esrefnifteliyev.cryptoapp.databinding.FragmentRegisterBinding
+import com.esrefnifteliyev.cryptoapp.databinding.FragmentForgotPasswordBinding
 import com.esrefnifteliyev.cryptoapp.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
-    private lateinit var binding: FragmentRegisterBinding
+class ForgotPasswordFragment : Fragment() {
+    private lateinit var binding: FragmentForgotPasswordBinding
     private val registerViewModel: RegisterViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater,container,false)
+        binding = FragmentForgotPasswordBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.registerButton.setOnClickListener {
-            val email = binding.registerEmailEdit.text.toString()
-            val password = binding.registerPasswordEdit.text.toString()
+        binding.sendButton.setOnClickListener {
+            var email = binding.editReset.text.toString()
 
-            registerViewModel.createUser(email,password, onSuccess = {
+            registerViewModel.resetPassword(email, onSuccess = {
+                Toast.makeText(requireContext(),"Success,Check your email inbox",Toast.LENGTH_LONG).show()
                 findNavController().navigate(R.id.loginFragment)
             }, onFail = {
-                 Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
             })
         }
 
-        binding.haveAccount.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
-        }
-
     }
+
+
 }

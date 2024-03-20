@@ -25,4 +25,16 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
+    fun resetPassword(email: String,onSuccess: () -> Unit,onFail: (Exception) -> Unit){
+        viewModelScope.launch {
+            firebaseRepo.resetPassword(email, onSuccess, onFail)
+        }
+    }
+
+    fun signOut(){
+        viewModelScope.launch {
+            firebaseRepo.signOut()
+        }
+    }
+
 }

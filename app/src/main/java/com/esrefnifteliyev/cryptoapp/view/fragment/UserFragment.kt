@@ -1,5 +1,4 @@
 package com.esrefnifteliyev.cryptoapp.view.fragment
-
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,13 +15,16 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentUserBinding
+import com.esrefnifteliyev.cryptoapp.viewmodel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class UserFragment : Fragment() {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private lateinit var actionLauncher: ActivityResultLauncher<Intent>
+    private val registerViewModel: RegisterViewModel by viewModels()
     private var image: Uri? = null
     private lateinit var binding: FragmentUserBinding
     override fun onCreateView(
@@ -41,6 +43,13 @@ class UserFragment : Fragment() {
         binding.personImage.setOnClickListener {
              check(it)
         }
+
+
+        binding.logout.setOnClickListener {
+            registerViewModel.signOut()
+        }
+
+
 
     }
 
@@ -96,6 +105,8 @@ class UserFragment : Fragment() {
                 }
             }
     }
+
+
 
 
 }

@@ -21,4 +21,18 @@ class FirebaseRepository(private val fds: FirebaseDataSource) : FirebaseInterfac
     ) {
         fds.signInUSer(email,password, onSuccess, onFail)
     }
+
+    override suspend fun resetPassword(
+        email: String,
+        onSuccess: () -> Unit,
+        onFail: (Exception) -> Unit
+    ) {
+        fds.resetPassword(email, onSuccess, onFail)
+    }
+
+    override suspend fun signOut(){
+        fds.signOut()
+    }
+
+
 }

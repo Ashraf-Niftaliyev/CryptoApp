@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.esrefnifteliyev.cryptoapp.R
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentLoginBinding
 import com.esrefnifteliyev.cryptoapp.view.activity.MainActivity
 import com.esrefnifteliyev.cryptoapp.viewmodel.RegisterViewModel
@@ -37,6 +40,14 @@ class LoginFragment : Fragment() {
             }, onFail = {
                  Toast.makeText(requireContext(),it.localizedMessage,Toast.LENGTH_LONG).show()
             })
+        }
+
+        binding.dontHaveAccount.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        binding.forgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.forgotPasswordFragment)
         }
 
     }

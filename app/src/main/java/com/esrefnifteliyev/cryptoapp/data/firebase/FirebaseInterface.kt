@@ -7,4 +7,8 @@ interface FirebaseInterface {
 
     suspend fun singInUser(email: String,password: String,onSuccess: () -> Unit, onFail: (Exception) -> Unit,)
 
+    suspend fun resetPassword(email: String,onSuccess: () -> Unit,onFail: (Exception) -> Unit)
+
+    suspend fun signOut()
+
 }
