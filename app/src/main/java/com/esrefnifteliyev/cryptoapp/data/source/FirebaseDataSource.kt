@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class FirebaseDataSource() {
+class FirebaseDataSource {
      private val authLiveData = MutableLiveData(Firebase.auth)
     suspend fun createUser(email: String, password: String, onSuccess: () -> Unit, onFail: (Exception) -> Unit) = withContext(Dispatchers.IO){
         authLiveData.value?.createUserWithEmailAndPassword(email,password)?.addOnSuccessListener {

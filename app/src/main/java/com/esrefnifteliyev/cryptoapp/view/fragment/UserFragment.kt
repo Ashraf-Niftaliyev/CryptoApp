@@ -16,10 +16,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.esrefnifteliyev.cryptoapp.R
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentUserBinding
+import com.esrefnifteliyev.cryptoapp.view.FIREBASE_AUTH_TAG
+import com.esrefnifteliyev.cryptoapp.view.activity.RegisterActivity
 import com.esrefnifteliyev.cryptoapp.viewmodel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.app
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class UserFragment : Fragment() {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
@@ -47,10 +54,12 @@ class UserFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             registerViewModel.signOut()
+            val intent = Intent(requireActivity(), RegisterActivity::class.java).apply {
+                putExtra(FIREBASE_AUTH_TAG, false)
+            }
+            requireActivity().startActivity(intent)
+            requireActivity().finish()
         }
-
-
-
     }
 
     fun check(view: View){

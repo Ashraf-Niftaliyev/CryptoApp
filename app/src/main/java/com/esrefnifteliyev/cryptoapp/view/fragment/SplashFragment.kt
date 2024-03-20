@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.esrefnifteliyev.cryptoapp.R
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentSplashBinding
+import com.esrefnifteliyev.cryptoapp.view.FIREBASE_AUTH_TAG
 import com.esrefnifteliyev.cryptoapp.view.activity.MainActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
@@ -23,21 +26,25 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSplashBinding.inflate(inflater,container,false)
+        binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
 
-        val auth = Firebase.auth
+    override fun onResume() {
+        super.onResume()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             delay(2000)
-            if(auth.currentUser != null && auth.currentUser!!.email != null){
-                val intent = Intent(requireActivity(),MainActivity::class.java)
+            if (FirebaseAuth.getInstance().currentUser != null
+                && requireActivity().intent.getBooleanExtra(FIREBASE_AUTH_TAG, false)
+            ) {
+                val intent = Intent(requireActivity(), MainActivity::class.java)
                 requireActivity().startActivity(intent)
-            }else{
+            } else {
                 findNavController().navigate(R.id.loginFragment)
             }
         }
