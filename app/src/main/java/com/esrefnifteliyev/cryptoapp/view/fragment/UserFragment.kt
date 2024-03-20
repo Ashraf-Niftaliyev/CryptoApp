@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,20 +15,28 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.esrefnifteliyev.cryptoapp.databinding.FragmentUserBinding
+import com.esrefnifteliyev.cryptoapp.view.activity.RegisterActivity
+import com.esrefnifteliyev.cryptoapp.viewmodel.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserFragment : Fragment() {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private lateinit var actionLauncher: ActivityResultLauncher<Intent>
+    private val registerViewModel: RegisterViewModel by viewModels()
     private var image: Uri? = null
     private lateinit var binding: FragmentUserBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentUserBinding.inflate(inflater,container,false)
+        binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -39,37 +46,51 @@ class UserFragment : Fragment() {
         registerPermission()
 
         binding.personImage.setOnClickListener {
-             check(it)
+            check(it)
         }
 
+
+        binding.logout.setOnClickListener {
+//            registerViewModel.signOut()
+            Firebase.auth.signOut()
+            val intent = Intent(requireActivity(), RegisterActivity::class.java)
+            requireActivity().startActivity(intent)
+            requireActivity().finish()
+        }
     }
 
-    fun check(view: View){
+    fun check(view: View) {
         if (
-            ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
             != PackageManager.PERMISSION_GRANTED
         ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),android.Manifest.permission.READ_EXTERNAL_STORAGE)){
-                Snackbar.make(view,"Permission needed",Snackbar.LENGTH_LONG).setAction("Give Permission"){
-                    permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                }.show()
-            }else{
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                Snackbar.make(view, "Permission needed", Snackbar.LENGTH_LONG)
+                    .setAction("Give Permission") {
+                        permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    }.show()
+            } else {
                 permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             }
 
 
-        }
-
-        else {
-            val intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        } else {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             actionLauncher.launch(intent)
         }
     }
 
-    fun registerAction(){
+    fun registerAction() {
         actionLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-                if (result.resultCode == RESULT_OK){
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
                     val d = result.data
                     d?.let { intentResult ->
                         intentResult.data?.let {
@@ -83,16 +104,16 @@ class UserFragment : Fragment() {
             }
     }
 
-    fun registerPermission(){
+    fun registerPermission() {
         registerAction()
         permissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()){ result ->
-                if (result){
-                    val intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
+                if (result) {
+                    val intent =
+                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     actionLauncher.launch(intent)
-                }
-                else{
-                    Toast.makeText(requireContext(),"Permission denied",Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_LONG).show()
                 }
             }
     }

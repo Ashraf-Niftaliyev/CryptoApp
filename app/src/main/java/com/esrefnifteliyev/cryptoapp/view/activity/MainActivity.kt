@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.esrefnifteliyev.cryptoapp.R
 import com.esrefnifteliyev.cryptoapp.databinding.ActivityMainBinding
 import com.esrefnifteliyev.cryptoapp.view.fragment.DetailsFragment
@@ -20,30 +21,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
+//        val navController = navHostFragment.navController
+
+        NavigationUI.setupWithNavController(binding.bottomNavigation,navHostFragment.navController,)
 
 
 
-        binding.bottomNavigation.setOnItemSelectedListener {
-
-
-            when (it.itemId) {
-                R.id.Home -> navController.navigate(R.id.homeFragment)
-                R.id.Saved -> navController.navigate(R.id.savedFragment)
-                R.id.User -> navController.navigate(R.id.userFragment)
-
-                else -> navController.navigate(R.id.homeFragment)
-
-            }
-
-            true
-
-        }
+//        binding.bottomNavigation.setOnItemSelectedListener {
+//
+//
+//            when (it.itemId) {
+//                R.id.Home -> navController.navigate(R.id.homeFragment)
+//                R.id.Saved -> navController.navigate(R.id.savedFragment)
+//                R.id.User -> navController.navigate(R.id.userFragment)
+//
+//                else -> navController.navigate(R.id.homeFragment)
+//
+//            }
+//
+//            true
+//
+//        }
 
 
     }

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-     <item android:id="@+id/Home"
+     <item android:id="@+id/homeFragment"
          android:title="Home"
          android:icon="@drawable/home_icon"
          />
 
-     <item android:id="@+id/Saved"
+     <item android:id="@+id/savedFragment"
           android:title="Saved"
           android:icon="@drawable/save_icon"
          />
 
-     <item android:id="@+id/User"
+     <item android:id="@+id/userFragment"
           android:title="User"
           android:icon="@drawable/user_icon"
          />
